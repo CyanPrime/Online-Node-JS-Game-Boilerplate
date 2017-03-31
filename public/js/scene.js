@@ -1,6 +1,5 @@
 var Scene = function(){
 	this.clients = [];
-	
 	this.type = "scene";
 };
 
@@ -34,6 +33,19 @@ Scene.prototype.getClientFromID = function(id){
 	return null;
 }
 
+Scene.prototype.disconnectClientFromID = function(id){
+	for(var i = 0; i < this.clients.length; i++){
+		if(this.clients[i] != undefined){
+			if(this.clients[i].id == id){
+				this.clients[i].disconnected = true;
+				return i;
+			}
+		}
+	}
+	
+	return  -1;
+}
+
 Scene.prototype.replaceClientFromID = function(id, nc){
 	for(var i = 0; i < this.clients.length; i++){
 		if(nc != undefined){
@@ -51,10 +63,12 @@ Scene.prototype.draw = function(ctx){
 		var c = this.clients[i];
 		
 		if(c != undefined){
-			var myID = "default";
-			if(me != undefined) myID =  me.id;
-			if(c.id != myID){
-				ctx.fillRect(c.x, c.y, 32,32);
+			if(!c.disconnected){
+				var myID = "default";
+				if(me != undefined) myID =  me.id;
+				if(c.id != myID){
+					ctx.fillRect(c.x, c.y, 32,32);
+				}
 			}
 		}
 		

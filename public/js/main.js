@@ -20,18 +20,22 @@ var scene = new Scene();
 
 //using JQuery we check if any of our important keys are down (the arrows)
 $( document ).keydown(function( event ) {
-	if(event.keyCode == 37) me.input.left = true;
-	if(event.keyCode == 39) me.input.right = true;
-	if(event.keyCode == 38) me.input.up = true;
-	if(event.keyCode == 40) me.input.down = true;
+	if(!me.disconnected){
+		if(event.keyCode == 37) me.input.left = true;
+		if(event.keyCode == 39) me.input.right = true;
+		if(event.keyCode == 38) me.input.up = true;
+		if(event.keyCode == 40) me.input.down = true;
+	}
 });
 
 //using JQuery we check if any of our important keys are up (the arrows)
 $( document ).keyup(function( event ) {
-	if(event.keyCode == 37) me.input.left = false;
-	if(event.keyCode == 39) me.input.right = false;
-	if(event.keyCode == 38) me.input.up = false;
-	if(event.keyCode == 40) me.input.down = false;
+	if(!me.disconnected){
+		if(event.keyCode == 37) me.input.left = false;
+		if(event.keyCode == 39) me.input.right = false;
+		if(event.keyCode == 38) me.input.up = false;
+		if(event.keyCode == 40) me.input.down = false;
+	}
 });
 
 $( document ).ready(function() {
@@ -43,6 +47,10 @@ $( document ).ready(function() {
 	socket.on('get_player', function(msg){
 		console.log(msg.id);
 		me = new Player(msg.id);
+	});
+	
+	socket.on('quit_player', function(msg){
+		if(scene.disconnectClientFromID(msg.id) >= 0) console.log(msg.id);
 	});
 	
 	//socket.io stuff: get the current "key frame" from the other players

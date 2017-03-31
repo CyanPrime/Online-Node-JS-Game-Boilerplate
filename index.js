@@ -75,7 +75,7 @@ io.on('connection', function (socket) {
 		/*if(sockets[socket.id] !== undefined){
 			sockets[socket.id] = undefined;
 		}*/
-		
+		io.emit('quit_player', { id: socket.id });
 		console.log(socket.id + ' disconnected');
 	});
 });

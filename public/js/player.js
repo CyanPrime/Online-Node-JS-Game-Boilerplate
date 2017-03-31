@@ -22,6 +22,7 @@ Player.prototype.update = function(savePrevState){
 			this.prevStates.splice(0,1);
 		}
 	}
+	
 	if(this.input.up) this.y -= this.speed;
 	if(this.input.down) this.y += this.speed;
 	if(this.input.left) this.x -= this.speed;
