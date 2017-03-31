@@ -1,0 +1,23 @@
+* { 
+	margin: 0; 
+	padding: 0; 
+	box-sizing: border-box; 
+}
+
+body {
+	font: 13px Helvetica, Arial; 
+	
+}
+
+#screen { 
+	position: absolute;
+	left: 12vw;
+	height: 100vh; 
+	width: 75vw; 
+	display: block;
+	image-rendering: pixelated;
+	
+	background-image: url("img/bg.png");
+	background-repeat: repeat;
+	background-position: 0px, 0px;
+}
