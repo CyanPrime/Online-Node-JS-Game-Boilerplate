@@ -91,4 +91,4 @@ var mainLoop = function(){
 	}
 };
 
-var updateInterval = setInterval(mainLoop, 1000 / 60);
+var updateInterval = setInterval(mainLoop, 100 / 60);
